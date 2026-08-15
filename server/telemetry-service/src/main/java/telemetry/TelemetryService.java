@@ -11,9 +11,9 @@ public class TelemetryService {
         this.deviceRepository = deviceRepository;
     }
 
-    public bool addTelemetryMeasurement(TelemetryMeasurement measurement, String device)
+    public boolean addTelemetryMeasurement(TelemetryMeasurement measurement, String device)
     {
-        if (deviceRepository.contains(device))
+        if (deviceRepository.existsById(device))
         {
             //TODO: add measurement 
             return true;
