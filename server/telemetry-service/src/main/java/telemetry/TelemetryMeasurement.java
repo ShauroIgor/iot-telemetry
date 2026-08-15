@@ -1,19 +1,44 @@
 package main.java.telemetry;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
 public class TelemetryMeasurement {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String deviceId;
     private String timestamp;
-    private double temperatureValue;
+    private String metricName;
+    private double metricValue;
 
     public TelemetryMeasurement() {}
 
-    public TelemetryMeasurement(String timestamp, double temperatureValue) {
+    public TelemetryMeasurement(String deviceId, String timestamp, String metricName, double metricValue) {
+        this.deviceId = deviceId;
         this.timestamp = timestamp;
-        this.temperatureValue = temperatureValue;
+        this.metricName = metricName;
+        this.metricValue = metricValue;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getDeviceId() {
+        return deviceId;
+    }
+
+    public void setDeviceId(String deviceId) {
+        this.deviceId = deviceId;
     }
 
     public String getTimestamp() {
@@ -24,11 +49,19 @@ public class TelemetryMeasurement {
         this.timestamp = timestamp;
     }
 
-    public double getTemperatureValue() {
-        return temperatureValue;
+    public String getMetricName() {
+        return metricName;
     }
 
-    public void setTemperatureValue(double temperatureValue) {
-        this.temperatureValue = temperatureValue;
+    public void setMetricName(String metricName) {
+        this.metricName = metricName;
+    }
+
+    public double getMetricValue() {
+        return metricValue;
+    }
+
+    public void setMetricValue(double metricValue) {
+        this.metricValue = metricValue;
     }
 }

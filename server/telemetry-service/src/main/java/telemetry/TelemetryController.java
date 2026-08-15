@@ -34,7 +34,7 @@ public class TelemetryController {
             @ApiResponse(responseCode = "201", description = "User created successfully", content = @Content(mediaType = "text/plain")),
             @ApiResponse(responseCode = "400", description = "Invalid user supplied", content = @Content) })
     @PostMapping({ "", "/" })
-    public ResponseEntity<String> addTelemetryMeasurement(@RequestBody TelemetryMeasurement measurement, String device) {
+    public ResponseEntity<String> addTelemetryMeasurement(@RequestBody TelemetryMeasurement measurement, @RequestParam String device) {
         telemetryService.addTelemetryMeasurement(measurement, device);
         return ResponseEntity.status(HttpStatus.CREATED).body("Measurement added successfully");
     }

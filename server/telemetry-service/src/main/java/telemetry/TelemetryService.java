@@ -5,23 +5,17 @@ import org.springframework.stereotype.Service;
 @Service
 public class TelemetryService {
     
-    private final DeviceRepository deviceRepository;
+    private final TelemetryRepository telemetryRepository;
 
-    public TelemetryService(DeviceRepository deviceRepository) {
-        this.deviceRepository = deviceRepository;
+    public TelemetryService(TelemetryRepository telemetryRepository) {
+        this.telemetryRepository = telemetryRepository;
     }
 
-    public boolean addTelemetryMeasurement(TelemetryMeasurement measurement, String device)
+    public boolean addTelemetryMeasurement(TelemetryMeasurement measurement, String deviceId)
     {
-        if (deviceRepository.existsById(device))
-        {
-            //TODO: add measurement 
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        measurement.setDeviceId(deviceId);
+        telemetryRepository.save(measurement);
+        return true;
     }
     
 }
