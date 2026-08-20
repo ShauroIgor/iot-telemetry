@@ -1,0 +1,28 @@
+{
+  "title": "IoT Telemetry",
+  "refresh": "5s",
+  "panels": [
+    {
+      "type": "timeseries",
+      "title": "Sensor Metrics",
+      "gridPos": { "h": 9, "w": 24, "x": 0, "y": 0 },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": { "type": "postgres", "uid": "PostgreSQL" },
+          "rawSql": "SELECT \"timestamp\"::timestamptz AS \"time\", metric_value AS \"value\", metric_name AS \"metric\" FROM telemetry_measurement WHERE \"timestamp\"::timestamptz BETWEEN $__timeFrom() AND $__timeTo() ORDER BY 1 ASC",
+          "format": "time_series"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "drawStyle": "line",
+            "lineInterpolation": "smooth"
+          }
+        }
+      }
+    }
+  ],
+  "schemaVersion": 38
+}
