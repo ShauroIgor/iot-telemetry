@@ -1,28 +1,450 @@
 {
-  "title": "IoT Telemetry",
-  "refresh": "5s",
-  "panels": [
-    {
-      "type": "timeseries",
-      "title": "Sensor Metrics",
-      "gridPos": { "h": 9, "w": 24, "x": 0, "y": 0 },
-      "targets": [
-        {
-          "refId": "A",
-          "datasource": { "type": "postgres", "uid": "PostgreSQL" },
-          "rawSql": "SELECT \"timestamp\"::timestamptz AS \"time\", metric_value AS \"value\", metric_name AS \"metric\" FROM telemetry_measurement WHERE \"timestamp\"::timestamptz BETWEEN $__timeFrom() AND $__timeTo() ORDER BY 1 ASC",
-          "format": "time_series"
-        }
-      ],
-      "fieldConfig": {
-        "defaults": {
-          "custom": {
-            "drawStyle": "line",
-            "lineInterpolation": "smooth"
+  "apiVersion": "dashboard.grafana.app/v2",
+  "kind": "Dashboard",
+  "metadata": {
+    "name": "72bebb4b-e30f-42a7-95ed-5f0f0349e3bf",
+    "namespace": "default",
+    "uid": "3d8e993f-9fde-4f3e-a83a-319ecb92076d",
+    "resourceVersion": "1791282537545018",
+    "generation": 8,
+    "creationTimestamp": "2026-10-05T19:35:54Z",
+    "labels": {
+      "grafana.app/deprecatedInternalID": "4012051183443968"
+    },
+    "annotations": {
+      "grafana.app/createdBy": "access-policy:service",
+      "grafana.app/managedBy": "classic-file-provisioning",
+      "grafana.app/managerId": "default",
+      "grafana.app/sourceChecksum": "697e16d3091f030b2da3af259e86d2db",
+      "grafana.app/sourcePath": "/var/lib/grafana/dashboards/telemetry.json",
+      "grafana.app/sourceTimestamp": "1791282532000",
+      "grafana.app/updatedBy": "access-policy:service",
+      "grafana.app/updatedTimestamp": "2026-10-06T10:28:57Z",
+      "grafana.app/folder": ""
+    }
+  },
+  "spec": {
+    "annotations": [
+      {
+        "kind": "AnnotationQuery",
+        "spec": {
+          "builtIn": true,
+          "enable": true,
+          "hide": true,
+          "iconColor": "rgba(0, 211, 255, 1)",
+          "name": "Annotations & Alerts",
+          "query": {
+            "datasource": {
+              "name": "-- Grafana --"
+            },
+            "group": "grafana",
+            "kind": "DataQuery",
+            "spec": {},
+            "version": "v0"
           }
         }
       }
-    }
-  ],
-  "schemaVersion": 38
+    ],
+    "cursorSync": "Off",
+    "editable": true,
+    "elements": {
+      "panel-1": {
+        "kind": "Panel",
+        "spec": {
+          "data": {
+            "kind": "QueryGroup",
+            "spec": {
+              "queries": [
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "hidden": false,
+                    "query": {
+                      "datasource": {
+                        "name": "PostgreSQL"
+                      },
+                      "group": "postgres",
+                      "kind": "DataQuery",
+                      "spec": {
+                        "format": "time_series",
+                        "rawSql": "SELECT \"timestamp\"::timestamptz AS \"time\", metric_value AS \"value\", metric_name AS \"metric\" FROM telemetry_measurement WHERE \"timestamp\"::timestamptz BETWEEN $__timeFrom() AND $__timeTo() ORDER BY 1 ASC"
+                      },
+                      "version": "v0"
+                    },
+                    "refId": "A"
+                  }
+                }
+              ],
+              "queryOptions": {},
+              "transformations": []
+            }
+          },
+          "description": "",
+          "id": 1,
+          "links": [],
+          "title": "Sensor Metrics",
+          "vizConfig": {
+            "group": "timeseries",
+            "kind": "VizConfig",
+            "spec": {
+              "fieldConfig": {
+                "defaults": {
+                  "color": {
+                    "mode": "palette-classic"
+                  },
+                  "custom": {
+                    "axisBorderShow": false,
+                    "axisCenteredZero": false,
+                    "axisColorMode": "text",
+                    "axisLabel": "",
+                    "axisPlacement": "auto",
+                    "barAlignment": 0,
+                    "barWidthFactor": 0.6,
+                    "drawStyle": "line",
+                    "fillOpacity": 0,
+                    "gradientMode": "none",
+                    "hideFrom": {
+                      "legend": false,
+                      "tooltip": false,
+                      "viz": false
+                    },
+                    "insertNulls": false,
+                    "lineInterpolation": "smooth",
+                    "lineWidth": 1,
+                    "pointSize": 5,
+                    "scaleDistribution": {
+                      "type": "linear"
+                    },
+                    "showPoints": "auto",
+                    "showValues": false,
+                    "spanNulls": false,
+                    "stacking": {
+                      "group": "A",
+                      "mode": "none"
+                    },
+                    "thresholdsStyle": {
+                      "mode": "off"
+                    }
+                  },
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "color": "green",
+                        "value": 0
+                      },
+                      {
+                        "color": "red",
+                        "value": 80
+                      }
+                    ]
+                  }
+                },
+                "overrides": []
+              },
+              "options": {
+                "legend": {
+                  "calcs": [],
+                  "displayMode": "list",
+                  "placement": "bottom",
+                  "showLegend": true
+                },
+                "tooltip": {
+                  "hideZeros": false,
+                  "mode": "single",
+                  "sort": "none"
+                }
+              }
+            },
+            "version": "13.2.3"
+          }
+        }
+      },
+      "panel-2": {
+        "kind": "Panel",
+        "spec": {
+          "data": {
+            "kind": "QueryGroup",
+            "spec": {
+              "queries": [
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "hidden": false,
+                    "query": {
+                      "datasource": {
+                        "name": "PostgreSQL"
+                      },
+                      "group": "grafana-postgresql-datasource",
+                      "kind": "DataQuery",
+                      "spec": {
+                        "dataset": "telemetry",
+                        "editorMode": "code",
+                        "format": "table",
+                        "rawQuery": true,
+                        "rawSql": "SELECT mac_address, is_approved FROM device ORDER BY mac_address",
+                        "sql": {
+                          "columns": [
+                            {
+                              "parameters": [],
+                              "type": "function"
+                            }
+                          ],
+                          "groupBy": [
+                            {
+                              "property": {
+                                "type": "string"
+                              },
+                              "type": "groupBy"
+                            }
+                          ],
+                          "limit": 50
+                        }
+                      },
+                      "version": "v0"
+                    },
+                    "refId": "A"
+                  }
+                }
+              ],
+              "queryOptions": {},
+              "transformations": []
+            }
+          },
+          "description": "",
+          "id": 2,
+          "links": [],
+          "title": "New panel",
+          "vizConfig": {
+            "group": "table",
+            "kind": "VizConfig",
+            "spec": {
+              "fieldConfig": {
+                "defaults": {
+                  "color": {
+                    "mode": "thresholds"
+                  },
+                  "custom": {
+                    "align": "auto",
+                    "cellOptions": {
+                      "type": "auto"
+                    },
+                    "footer": {
+                      "reducers": []
+                    },
+                    "inspect": false
+                  },
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "color": "green",
+                        "value": 0
+                      },
+                      {
+                        "color": "red",
+                        "value": 80
+                      }
+                    ]
+                  }
+                },
+                "overrides": []
+              },
+              "options": {
+                "cellHeight": "sm",
+                "showHeader": true
+              }
+            },
+            "version": "13.2.3"
+          }
+        }
+      },
+      "panel-3": {
+        "kind": "Panel",
+        "spec": {
+          "data": {
+            "kind": "QueryGroup",
+            "spec": {
+              "queries": [],
+              "queryOptions": {},
+              "transformations": []
+            }
+          },
+          "description": "Approve pending devices",
+          "id": 3,
+          "links": [],
+          "title": "Approve Device",
+          "vizConfig": {
+            "group": "volkovlabs-form-panel",
+            "kind": "VizConfig",
+            "spec": {
+              "fieldConfig": {
+                "defaults": {},
+                "overrides": []
+              },
+              "options": {
+                "buttonGroup": {
+                  "orientation": "center",
+                  "size": "lg"
+                },
+                "confirmModal": {
+                  "body": "Please confirm to update changed values",
+                  "cancel": "Cancel",
+                  "columns": {
+                    "include": [
+                      "name",
+                      "oldValue",
+                      "newValue"
+                    ],
+                    "name": "Label",
+                    "newValue": "New Value",
+                    "oldValue": "Old Value"
+                  },
+                  "confirm": "Confirm",
+                  "elementDisplayMode": "modified",
+                  "title": "Confirm update request"
+                },
+                "elementValueChanged": "",
+                "elements": [
+                  {
+                    "id": "macAddress",
+                    "title": "Device MAC Address",
+                    "type": "string",
+                    "uid": "82fd8ab7-eddc-4dfd-8eb6-ad0933a8f625",
+                    "width": 100
+                  }
+                ],
+                "initial": {
+                  "code": "console.log(context.panel.data, context.panel.response, context.panel.initial, context.panel.elements);\n\nreturn;\n\n/**\nData Source\nRequires form elements to be defined\n */\nconst dataQuery = context.utils.toDataQueryResponse(context.panel.response);\nconsole.log(dataQuery);",
+                  "contentType": "application/json",
+                  "getPayload": "return {}",
+                  "highlight": false,
+                  "highlightColor": "red",
+                  "method": "-",
+                  "payload": {}
+                },
+                "layout": {
+                  "orientation": "horizontal",
+                  "padding": 10,
+                  "sectionVariant": "default",
+                  "variant": "single"
+                },
+                "reset": {
+                  "backgroundColor": "purple",
+                  "foregroundColor": "yellow",
+                  "icon": "process",
+                  "text": "Reset",
+                  "variant": "hidden"
+                },
+                "resetAction": {
+                  "code": "if (context.panel.response) {\n  context.grafana.notifySuccess(['Update', 'Values updated successfully.']);\n  context.grafana.refresh();\n} else {\n  context.grafana.notifyError(['Update', 'An error occurred updating values.']);\n}",
+                  "confirm": false,
+                  "getPayload": "return {}",
+                  "mode": "initial",
+                  "payload": {}
+                },
+                "saveDefault": {
+                  "icon": "save",
+                  "text": "Save Default",
+                  "variant": "hidden"
+                },
+                "submit": {
+                  "backgroundColor": "purple",
+                  "foregroundColor": "yellow",
+                  "icon": "check",
+                  "text": "Approve",
+                  "variant": "destructive"
+                },
+                "sync": false,
+                "update": {
+                  "code": "const macEl = context.panel.elements.find((el) => el.id === 'macAddress');\nconst mac = macEl ? (macEl.value || '').trim() : '';\n\nif (!mac) {\n  context.grafana.notifyError(['Approve Device', 'Enter a MAC address first.']);\n  return;\n}\n\nconst body = {\n  queries: [\n    {\n      refId: 'A',\n      datasource: { type: 'yesoreyeram-infinity-datasource', uid: 'TelemetryAdminAPI' },\n      type: 'json',\n      source: 'url',\n      format: 'table',\n      parser: 'backend',\n      url: '/telemetry/devices/' + encodeURIComponent(mac) + '/approve',\n      url_options: { method: 'POST', data: '', body_type: 'none' }\n    }\n  ]\n};\n\nfetch('/api/ds/query', {\n  method: 'POST',\n  headers: { 'Content-Type': 'application/json' },\n  credentials: 'same-origin',\n  body: JSON.stringify(body)\n}).then(async (res) => {\n  const json = await res.json().catch(() => ({}));\n  const result = json && json.results ? json.results.A : undefined;\n  if (res.ok && result && !result.error) {\n    context.grafana.notifySuccess(['Approve Device', 'Device approved: ' + mac]);\n    context.grafana.refresh();\n  } else {\n    const message = (result && result.error) || ('HTTP ' + res.status);\n    context.grafana.notifyError(['Approve Device', 'Failed: ' + message]);\n  }\n}).catch((err) => {\n  context.grafana.notifyError(['Approve Device', 'Request failed: ' + err.message]);\n});",
+                  "confirm": false,
+                  "contentType": "application/json",
+                  "getPayload": "const payload = {};\ncontext.panel.elements.forEach((element) => {\n  if (!element.value) {\n    return;\n  }\n  payload[element.id] = element.value;\n})\nreturn payload;",
+                  "method": "-",
+                  "payload": {},
+                  "payloadMode": "all",
+                  "type": "-"
+                },
+                "updateEnabled": "auto"
+              }
+            },
+            "version": "6.3.5"
+          }
+        }
+      }
+    },
+    "layout": {
+      "kind": "GridLayout",
+      "spec": {
+        "items": [
+          {
+            "kind": "GridLayoutItem",
+            "spec": {
+              "element": {
+                "kind": "ElementReference",
+                "name": "panel-1"
+              },
+              "height": 9,
+              "width": 24,
+              "x": 0,
+              "y": 0
+            }
+          },
+          {
+            "kind": "GridLayoutItem",
+            "spec": {
+              "element": {
+                "kind": "ElementReference",
+                "name": "panel-2"
+              },
+              "height": 8,
+              "width": 12,
+              "x": 0,
+              "y": 9
+            }
+          },
+          {
+            "kind": "GridLayoutItem",
+            "spec": {
+              "element": {
+                "kind": "ElementReference",
+                "name": "panel-3"
+              },
+              "height": 8,
+              "width": 12,
+              "x": 12,
+              "y": 9
+            }
+          }
+        ]
+      }
+    },
+    "links": [],
+    "liveNow": false,
+    "preload": false,
+    "tags": [],
+    "timeSettings": {
+      "autoRefresh": "5s",
+      "autoRefreshIntervals": [
+        "5s",
+        "10s",
+        "30s",
+        "1m",
+        "5m",
+        "15m",
+        "30m",
+        "1h",
+        "2h",
+        "1d"
+      ],
+      "fiscalYearStartMonth": 0,
+      "from": "now-6h",
+      "hideTimepicker": false,
+      "timezone": "browser",
+      "to": "now"
+    },
+    "title": "IoT Telemetry",
+    "variables": []
+  }
 }

@@ -11,3 +11,12 @@ datasources:
       database: $__env{POSTGRES_DB}
       sslmode: "disable"
     isDefault: true
+
+  - name: TelemetryAdminAPI
+    uid: TelemetryAdminAPI
+    type: yesoreyeram-infinity-datasource
+    url: http://telemetry-service:8080
+    jsonData:
+      httpHeaderName1: "X-Admin-Api-Key"
+    secureJsonData:
+      httpHeaderValue1: "$__env{ADMIN_API_KEY}"

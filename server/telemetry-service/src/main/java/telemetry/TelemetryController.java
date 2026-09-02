@@ -56,6 +56,10 @@ public class TelemetryController {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Device not registered.");
         }
 
+        if (!dbDevice.isApproved()) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Device is registered but pending approval.");
+        }
+
         // HMAC verification
         if (signature == null || !verifyHmac(rawPayload, dbDevice.getSharedSecret(), signature)) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid or missing HMAC signature.");
