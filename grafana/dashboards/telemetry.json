@@ -67,7 +67,7 @@
                       "kind": "DataQuery",
                       "spec": {
                         "format": "time_series",
-                        "rawSql": "SELECT \"timestamp\"::timestamptz AS \"time\", metric_value AS \"value\", metric_name AS \"metric\" FROM telemetry_measurement WHERE \"timestamp\"::timestamptz BETWEEN $__timeFrom() AND $__timeTo() ORDER BY 1 ASC"
+                        "rawSql": "SELECT \"timestamp\"::timestamptz AS \"time\", metric_value AS \"value\", metric_name AS \"metric\", device_id AS \"device\" FROM telemetry_measurement WHERE \"timestamp\"::timestamptz BETWEEN $__timeFrom() AND $__timeTo() AND device_id IN (${device:sqlstring}) ORDER BY 1 ASC"
                       },
                       "version": "v0"
                     },
@@ -424,6 +424,41 @@
     "liveNow": false,
     "preload": false,
     "tags": [],
+    "variables": [
+      {
+        "kind": "QueryVariable",
+        "spec": {
+          "name": "device",
+          "label": "Device",
+          "description": "",
+          "query": {
+            "datasource": {
+              "name": "PostgreSQL"
+            },
+            "group": "postgres",
+            "kind": "DataQuery",
+            "spec": {
+              "format": "table",
+              "rawSql": "SELECT DISTINCT device_id FROM telemetry_measurement ORDER BY 1"
+            },
+            "version": "v0"
+          },
+          "current": {
+            "text": ["All"],
+            "value": ["$__all"]
+          },
+          "hide": "dontHide",
+          "includeAll": true,
+          "allValue": "",
+          "multi": true,
+          "options": [],
+          "refresh": "onDashboardLoad",
+          "regex": "",
+          "skipUrlSync": false,
+          "sort": "alphabeticalAsc"
+        }
+      }
+    ],
     "timeSettings": {
       "autoRefresh": "5s",
       "autoRefreshIntervals": [
@@ -439,12 +474,11 @@
         "1d"
       ],
       "fiscalYearStartMonth": 0,
-      "from": "now-6h",
+      "from": "now-24h",
       "hideTimepicker": false,
       "timezone": "browser",
       "to": "now"
     },
-    "title": "IoT Telemetry",
-    "variables": []
+    "title": "IoT Telemetry"
   }
 }
